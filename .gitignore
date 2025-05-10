@@ -1,0 +1,5 @@
+# Ignore
+# Ignore all files in the output directory
+output/
+# Ignore all files in the builds directory
+builds/

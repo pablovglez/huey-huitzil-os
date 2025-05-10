@@ -1,0 +1,5 @@
+Welcome to Huey Huitzil Imagebuilder.
+
+Before continuing, make sure you are connected to Internet.
+
+You'll select a stable OpenWRT version and provide the paths of Extra packages list and Extra Files folder path.
