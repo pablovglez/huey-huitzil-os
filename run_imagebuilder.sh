@@ -66,7 +66,7 @@ done
 # If the custom files path is empty, continue and quit the if statement
 if [ -z "$custom_path" ]; then
     custom_path=""
-elif [ ! -f "$custom_path" ]; then
+elif [ ! -d "$custom_path" ]; then
   dialog --title "Error" --msgbox "Custom files path not found: $custom_path" 10 50
   exit 1
 fi
@@ -79,6 +79,7 @@ fi
 # Show a message with the list of packages in the file, replace spaces with new lines if custoḿ_packages is not empty
 if [ "$extra_packages" != "" ]; then
     dialog --title "Extra Packages" --msgbox "$(cat "$extra_packages" | tr ' ' '\n')" 20 60
+    extra_packages=$(cat "$extra_packages" | tr ' ' '\n')
 fi
 # Show a message with the list of files in the custom path if it is not empty
 if [ "$custom_path" != "" ]; then
@@ -87,6 +88,9 @@ fi
 
 # Get the name of the downloaded file
 OPENWRT_FILE=$(wget -qO- $OPENWRT_URL/$SELECTED_VERSION/$WGET_PATH/ | grep -oP 'href="(openwrt-imagebuilder-[^"]+)"' | cut -d'"' -f2)
+
+# Donwload the OpenWRT imagebuilder tar file
+wget -q $OPENWRT_URL/$SELECTED_VERSION/$WGET_PATH/$OPENWRT_FILE -O builds/$OPENWRT_FILE
 
 # --------------
 # Run the command to download the imagebuilder
